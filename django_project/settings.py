@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     #local apps
     'accounts.apps.AccountsConfig',
+    'articles.apps.ArticlesConfig',
 ]
 
 MIDDLEWARE = [
