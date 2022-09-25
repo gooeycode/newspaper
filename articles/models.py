@@ -16,10 +16,19 @@ class Article(models.Model):
         on_delete=models.CASCADE,
     )
 
-#return the title of the instantiated object
     def __str__(self):
         return self.title
 
-#get url of this object using the primary key of this object
     def get_absolute_url(self):
         return reverse("article_detail", kwargs={"pk":self.pk})
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=140)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment
+
+    def get_absolute_url(self):
+        return reverse("article_list")
