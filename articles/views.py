@@ -10,6 +10,8 @@ from .models import Article
 
 from django.urls import reverse_lazy
 
+from .forms import CommentForm
+
 #create view that lists article using template
 class ArticleListView(LoginRequiredMixin, ListView):
     model = Article
@@ -18,6 +20,11 @@ class ArticleListView(LoginRequiredMixin, ListView):
 class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     template_name = "article_detail.html"
+
+    def get_contextdata(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
 
 class ArticleUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView): 
     model = Article
@@ -52,4 +59,3 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
