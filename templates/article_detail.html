@@ -16,8 +16,10 @@
 <hr>
 
 <h4>Add a comment</h4>
+<p>Click save to open the space to upload your comment, then click save again to save it</p>
 <form action="" method="post">{% csrf_token %}
     {{ form|crispy }}
+    
     <button class="btn btn-success ml-2" type="submit">Save</button>
 </form>
 
